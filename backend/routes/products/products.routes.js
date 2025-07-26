@@ -2,7 +2,7 @@ import express from "express";
 import {
   addProduct,
   productList,
-  RemoveProduct,
+  removeProduct,
   singleProduct,
 } from "../../controllers/products/product.controller.js";
 import upload from "../../middleware/multer.js";
@@ -20,7 +20,7 @@ productRouter.post(
   addProduct
 );
 productRouter.get("/all_products", productList);
-productRouter.delete("/delete_product", RemoveProduct);
+productRouter.delete("/deleteProduct", removeProduct);
 productRouter.delete("/single_product", singleProduct);
 
 export default productRouter;

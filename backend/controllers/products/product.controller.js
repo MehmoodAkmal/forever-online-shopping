@@ -70,9 +70,14 @@ export const singleProduct = async (req , res) => {
     return res.status(response.status).json(response.message);
 }
 
-export const RemoveProduct = async (req , res) => {
+export const removeProduct = async (req , res) => {
     let response = {};
     try{
+        const {id} = req.body;
+        const product = await productModel.findByIdAndDelete(id);
+        if(!product){
+            throw new Error("Product not found");
+        }
         response.status = 200;
         response.message = "Product Added Successfully"
     }catch(error){
