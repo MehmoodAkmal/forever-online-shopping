@@ -86,7 +86,7 @@ export const adminLogin = async (req, res) => {
       return res.status(400).json({ message: "Invalid Admin Credentials" });
     }
 
-    const access_token = jwt.sign(email+password, process.env.ADMIN_SECRET);
+    const access_token = jwt.sign({email:email , password: password}, process.env.ADMIN_SECRET , {expiresIn: '8h'});
 
     response.status = 200;
     response.message = { success: "Admin Login Successful", access_token };
