@@ -60,8 +60,13 @@ export const productList = async (req , res) => {
 export const singleProduct = async (req , res) => {
     let response = {};
     try{
+        const {id} = req.body;
+        const product = await productModel.findById(id);
+        if(!product){
+            throw new Error("Product not found");
+        }   
         response.status = 200;
-        response.message = "Product Added Successfully"
+        response.message = {product: product};
     }catch(error){
         console.log("🚀 ~ addProduct ~ error:", error)
         response.status = 400;
