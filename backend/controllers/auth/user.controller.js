@@ -1,6 +1,7 @@
 import userModel from "../../models/userModel.js";
 import bcrypt from "bcrypt";
 import validator from "validator";
+import jwt from "jsonwebtoken";
 import { accessToken, refreshToken } from "../../utils/generate.token.js";
 
 export const loginUser = async (req, res) => {
@@ -75,3 +76,24 @@ export const register = async (req, res) => {
   }
   return res.status(response.status).json(response.message);
 };
+
+export const adminLogin = async (req, res) => {
+  let response = {};
+  try {
+    const { email, password } = req.body;
+
+    if(email !== process.env.ADMIN_EMAIL && password !== process.env.ADMIN_PASSWORD) {
+      return res.status(400).json({ message: "Invalid Admin Credentials" });
+    }
+
+    const access_token = jwt.sign(email+password, process.env.ADMIN_SECRET);
+
+    response.status = 200;
+    response.message = { success: "Admin Login Successful", access_token };
+  } catch (error) {
+    console.log("🚀 ~ adminLogin ~ error:", error);
+    response.status = 400;
+    response.message = error.message;
+  }
+  return res.status(response.status).json(response.message);
+}
