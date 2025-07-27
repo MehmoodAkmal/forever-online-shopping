@@ -7,6 +7,7 @@ import List from "./pages/List";
 import Order from "./pages/Order";
 
 function App() {
+  
   return (
     <div className="bg-gray-50 min-h-screen">
       <>
