@@ -89,7 +89,7 @@ export const adminLogin = async (req, res) => {
     const access_token = jwt.sign({email:email , password: password}, process.env.ADMIN_SECRET , {expiresIn: '8h'});
 
     response.status = 200;
-    response.message = { success: "Admin Login Successful", access_token };
+    response.message = { message: "Admin Login Successful", access_token };
   } catch (error) {
     console.log("🚀 ~ adminLogin ~ error:", error);
     response.status = 400;

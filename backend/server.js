@@ -12,7 +12,12 @@ connectCloudinary();
 const port = process.env.PORT || 8000
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5174',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true 
+}));
+
 
 prepareV1Routes(app);
 
