@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
-export const adminUth = async (req, res, next) => {
+export const adminAuth = async (req, res, next) => {
     try {
         const access_token = req.headers.authorization;
-        console.log("🚀 ~ adminUth ~ access_token:", access_token);
+        console.log("🚀 ~ adminAuth ~ access_token:", access_token);
 
-        if (!access_token || !access_token.startsWith("Bearer ")) {
+        if (!access_token || !access_token.startsWith("Bearer")) {
             return res.status(401).json({ message: "Unauthorized Access" });
         }
 
