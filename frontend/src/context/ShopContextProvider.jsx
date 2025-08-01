@@ -77,9 +77,10 @@ const ShopContextProvider = (props) => {
   const productsData = async () => {
     try{
       const response = await axios.get(`${backendUrl}/api/v1/products/all_products`);
+      console.log("🚀 ~ productsData ~ response:", response)
       if(response.status === 200){
+        
         setProducts(response.data);
-        console.log(products)
       }else{
         toast.error(response.data.message);
       }

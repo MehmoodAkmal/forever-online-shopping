@@ -6,25 +6,34 @@ import Title from "../components/Title";
 import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
-  const { productId } = useParams();
+  const { _id } = useParams();
   const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
-  const [image, setImage] = useState("");
+  const [images, setImages] = useState("");
   const [size, setSize] = useState("");
 
-  const fetchProductData = async () => {
-    products.map((item) => {
-      if (item._id === productId) {
-        setProductData(item);
-        setImage(item.image[0]);
-        return null;
-      }
-    });
-  };
+  // const fetchProductData = async () => {
+  //   products.map((item) => {
+  //     console.log("🚀 ~ fetchProductData ~ item:", item)
+  //     if (item._id === _id) {
+  //       setProductData(item);
+  //       setImage(item.image[0]);
+  //       return null;
+  //     }
+  //   });
+  // };
 
   useEffect(() => {
-    fetchProductData();
-  }, [productId]);
+  if (products.length > 0) {
+    console.log("_id" , _id)
+    const foundProduct = products.find((item) => item._id === _id);
+    console.log("🚀 ~ Product ~ foundProduct:", foundProduct)
+    if (foundProduct) {
+      setProductData(foundProduct);
+      setImages(foundProduct.images[0]);
+    }
+  }
+}, [_id, products]);
   return productData ? (
     <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
       {/* Product Data */}
@@ -32,9 +41,9 @@ const Product = () => {
         {/* Product Images */}
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
           <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
-            {productData.image.map((item, index) => (
+            {productData.images.map((item, index) => (
               <img
-                onClick={() => setImage(item)}
+                onClick={() => setImages(item)}
                 src={item}
                 key={index}
                 className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 "
@@ -43,7 +52,7 @@ const Product = () => {
             ))}
           </div>
           <div className="w-full sm:w-[80%]">
-            <img src={image} alt="" className="w-full h-auto" />
+            <img src={images} alt="" className="w-full h-auto" />
           </div>
         </div>
         {/* Product Info */}
@@ -124,7 +133,7 @@ const Product = () => {
 
     </div>
   ) : (
-    <div className="opacity-0"></div>
+    <div className="text-center py-10 text-gray-500">Loading product...</div>
   );
 };
 
