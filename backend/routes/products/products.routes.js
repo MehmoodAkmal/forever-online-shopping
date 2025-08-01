@@ -15,7 +15,7 @@ productRouter.post(
   addProduct
 );
 productRouter.get("/all_products", productList);
-productRouter.delete("/deleteProduct", removeProduct);
+productRouter.delete("/deleteProduct/:_id", removeProduct);
 productRouter.post("/getProduct", singleProduct);
 
 export default productRouter;

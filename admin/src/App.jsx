@@ -11,6 +11,7 @@ import Login from "./components/Login";
 
 
 export const backendUrl = 'http://localhost:8000';
+export const currency = '$';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token')?localStorage.getItem('token'):"");

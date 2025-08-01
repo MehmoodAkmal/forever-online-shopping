@@ -78,13 +78,13 @@ export const singleProduct = async (req , res) => {
 export const removeProduct = async (req , res) => {
     let response = {};
     try{
-        const {id} = req.body;
-        const product = await productModel.findByIdAndDelete(id);
+        const {_id} = req.params;
+        const product = await productModel.findByIdAndDelete(_id);
         if(!product){
-            throw new Error("Product not found");
+            throw new Error({message: "Product not found"});
         }
         response.status = 200;
-        response.message = "Product Added Successfully"
+        response.message = {message: "Product Deleted Successfully"}
     }catch(error){
         console.log("🚀 ~ addProduct ~ error:", error)
         response.status = 400;

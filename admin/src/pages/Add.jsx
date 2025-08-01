@@ -73,6 +73,7 @@ export const Add = () => {
 
   return (
     <div className="p-4 max-w-xl mx-auto">
+      <p>A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.</p>
       <h2 className="text-xl font-semibold mb-4">Add Product</h2>
 
       <form onSubmit={handleSubmitt} className="flex flex-col gap-4">
@@ -125,7 +126,7 @@ export const Add = () => {
         >
           <option>Topwear</option>
           <option>Bottomwear</option>
-          <option>Footwear</option>
+          <option>Winterwear</option>
         </select>
 
         {/* size checkboxes */}
